@@ -1,0 +1,12 @@
+{
+  "name": "vclass",
+  "displayName": "vclass",
+  "expo": {
+    "name": "vclass",
+    "slug": "vclass",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
