@@ -5,6 +5,18 @@
     "name": "vclass",
     "slug": "vclass",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "android": {
+      "splash": {
+        "ldpi": "./assets/image/splash/android/drawable-ldpi/splash.png",
+        "mdpi": "./assets/image/splash/android/drawable-mdpi/splash.png",
+        "hdpi": "./assets/image/splash/android/drawable-hdpi/splash.png",
+        "xhdpi": "./assets/image/splash/android/drawable-xhdpi/splash.png",
+        "xxhdpi": "./assets/image/splash/android/drawable-xxhdpi/splash.png",
+        "xxxhdpi": "./assets/image/splash/android/drawable-xxxhdpi/splash.png",
+        "resizeMode": "cover"
+      }
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
