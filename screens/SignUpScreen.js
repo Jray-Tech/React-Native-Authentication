@@ -25,36 +25,38 @@ export default function SignUpScreen(props) {
   const [email, setemail] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
 
+  const [firstnamePassed, setFirstNamePassed] = useState(true);
+  const [lastnamePassed, setlastnamePassed] = useState(true);
+  const [passwordPassed, setpasswordPassed] = useState(true);
+  const [emailPassed, setemailPassed] = useState(true);
+  const [confirmpasswordPassed, setconfirmpasswordPassed] = useState(true);
+
+  const [firstnameErrors, setFirstNameErrors] = useState([]);
+  const [lastnameErrors, setlastnameErrors] = useState([]);
+  const [passwordErrors, setpasswordErrors] = useState([]);
+  const [emailErrors, setemailErrors] = useState([]);
+  const [confirmpasswordErrors, setconfirmpasswordErrors] = useState([]);
+
   const [inputTypes, setInputTypes] = useState([
     {
       name: "First name",
-      passed: true,
       isPassword: false,
-      err: new Set(),
     },
     {
       name: "Last name",
-      passed: true,
       isPassword: false,
-      err: new Set(),
     },
     {
       name: "Email",
-      passed: true,
       isPassword: false,
-      err: new Set(),
     },
     {
       name: "Password",
-      passed: true,
       isPassword: true,
-      err: new Set(),
     },
     {
       name: "Confirm Password",
-      passed: true,
       isPassword: true,
-      err: new Set(),
     },
   ]);
 
@@ -75,74 +77,116 @@ export default function SignUpScreen(props) {
 
   const checkEmpty = () => {
     console.log("reached!!");
-    err = "can not be empty ";
-    
-    let newArr = inputTypes.map((i) => {
-      if (i.name === "First name") {
-        if (firstname === "") {
-          i.err = i.err.add(err);
-          i.passed = false;
+    let err = "can not be empty ";
+    if (firstname === "") {
+      setFirstNamePassed(false);
+      setFirstNameErrors((v) => {
+        if (v.includes(err)) {
+          return v;
+        } else {
+          v.push(err);
+          return v;
         }
-        if (firstname !== "") {
-          i.err.delete(err);
-          i.passed = true;
-        }
-      }
-      if (i.name === "Last name") {
-        if (lastname === "") {
-          i.err = i.err.add(err);
-          i.passed = false;
-        } 
-         if (lastname !== "") {
-          i.err.delete(err);
-          i.passed = true;
-        }
-      }
-      if (i.name === "Password") {
-        if (password === "") {
-          i.err.add(err);
-          i.passed = false;
-        } 
-         if (password !== "") {
-          i.err.delete(err);
-          i.passed = true;
-        }
-      }
-      if (i.name === "Email") {
-        if (email === "") {
-          i.err.add(err);
-          i.passed = false;
-        } 
-         if (email !== "") {
-          i.err.delete(err);
-          i.passed = true;
-        }
-      }
-      if (i.name === "Confirm Password") {
-        if (confirmpassword === "") {
-          i.err.add(err);
-          i.passed = false;
-        } 
-        if (confirmpassword !== "") {
-          i.err.delete(err);
-          i.passed = true;
-        }
-      }
+      });
+    } else {
+      setFirstNamePassed(true);
+      let newArr = firstnameErrors.filter((value) => value !== err);
+      setFirstNameErrors(newArr);
+    }
 
-      return i;
-    });
-    setInputTypes(newArr);
+    // setting values of empty erro for the other inputs.... this took over 6 hours lol
+    if (lastname === "") {
+      setlastnamePassed(false);
+      setlastnameErrors((v) => {
+        if (v.includes(err)) {
+          return v;
+        } else {
+          v.push(err);
+          return v;
+        }
+      });
+    } else {
+      setlastnamePassed(true);
+      let newArr = lastnameErrors.filter((value) => value !== err);
+      setlastnameErrors(newArr);
+    }
+    // i am writintg more code .....Code is better efficient tho!
+    if (password === "") {
+      setpasswordPassed(false);
+      setpasswordErrors((v) => {
+        if (v.includes(err)) {
+          return v;
+        } else {
+          v.push(err);
+          return v;
+        }
+      });
+    } else {
+      setpasswordPassed(true);
+      let newArr = passwordErrors.filter((value) => value !== err);
+      setpasswordErrors(newArr);
+    }
+
+    if (email === "") {
+      setemailPassed(false);
+      setemailErrors((v) => {
+        if (v.includes(err)) {
+          return v;
+        } else {
+          v.push(err);
+          return v;
+        }
+      });
+    } else {
+      setemailPassed(true);
+      let newArr = emailErrors.filter((value) => value !== err);
+      setemailErrors(newArr);
+    }
+
+    if (confirmpassword === "") {
+      setconfirmpasswordPassed(false);
+      setconfirmpasswordErrors((v) => {
+        if (v.includes(err)) {
+          return v;
+        } else {
+          v.push(err);
+          return v;
+        }
+      });
+    } else {
+      setconfirmpasswordPassed(true);
+      let newArr = confirmpasswordErrors.filter((value) => value !== err);
+      setconfirmpasswordErrors(newArr);
+    }
   };
+
   const getStartedPressed = () => {
     checkEmpty();
     // call other functions and do nedful with them ....
     // if all test are passed do needful also .... move on to nxt place
-    let v = inputTypes[0];
-    console.log(v.err);
+    console.log(firstnameErrors);
+    console.log("fiiii");
+  };
+
+  const returnError = (type) => {
+    switch (type) {
+      case "First name":
+          console.log('valueeeeeee')
+        return firstnameErrors;
+      case "Last name":
+        return lastnameErrors;
+      case "Password":
+        return passwordErrors;
+      case "Confirm Password":
+        return confirmpasswordErrors;
+      case "Email":
+        return emailErrors;
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
+        // i am writintg more code .....Code is better written tho!
         translucent={false}
         barStyle="dark-content"
         backgroundColor="white"
@@ -183,18 +227,18 @@ export default function SignUpScreen(props) {
                 textInputStyle={{ fontSize: 14 }}
                 maxLength={50}
                 style={styles.inputStyle}
-                status={type.passed}
+                // status={type.passed}
                 isPassword={type.isPassword}
               />
-              {type.err !== "" ? (
-                <Ctext
-                  style={{
-                    color: "black",
-                  }}
-                >
-                  {type.err}
-                </Ctext>
-              ) : null}
+              <Ctext
+                style={{
+                  color: "black",
+                }}
+              >
+                  {
+                      returnError(type.name)
+                  }
+              </Ctext>
             </View>
           ))}
         </View>
