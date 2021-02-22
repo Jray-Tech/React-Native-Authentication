@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 24,
+    color: Colors.main,
   },
   regularText: {
     fontSize: 12,
